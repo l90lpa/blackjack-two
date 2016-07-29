@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "Card.hpp"
+#include "card.hpp"
 
 int main()
 {
