@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "card.hpp"
+#include "deck.hpp"
 
 int main()
 {
