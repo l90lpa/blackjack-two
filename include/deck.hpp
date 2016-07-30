@@ -19,10 +19,12 @@ private:
     std::array<Card, 52>m_deck;
     static int getRandomNumber(int, int);
     static void swapCard(Card&, Card&);
+    int m_cardIndex;
 public:
     Deck();
     void printDeck();
     void shuffleDeck();
+    const Card& dealCard();
 };
 
 #endif /* deck_hpp */
