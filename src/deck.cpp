@@ -9,7 +9,7 @@
 #include <iostream>
 #include "deck.hpp"
 
-Deck::Deck()
+Deck::Deck() : m_cardIndex{0}
 {
     int index = 0;
     for(int suit = 0; suit < Card::CardSuit::SUIT_MAX; suit++)
@@ -60,5 +60,10 @@ void Deck::shuffleDeck()
     {
         swapCard(m_deck[index], m_deck[getRandomNumber(0, 51)]);
     }
+    m_cardIndex = 0;
 }
 
+const Card& Deck::dealCard()
+{
+    return m_deck[m_cardIndex++];
+}
