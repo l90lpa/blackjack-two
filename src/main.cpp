@@ -12,5 +12,9 @@
 
 int main()
 {
+    srand(static_cast<int>(time(0)));
+    rand();
+    
+    
     return 0;
 }
