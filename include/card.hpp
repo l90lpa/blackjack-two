@@ -38,10 +38,10 @@ public:
         SUIT_MAX
     };
 private:
-    CardRank m_rank = RANK_2;
-    CardSuit m_suit = SUIT_CLUB;
+    CardRank m_rank;
+    CardSuit m_suit;
 public:
-    Card(CardRank rank, CardSuit suit);
+    Card(CardRank rank = RANK_2, CardSuit suit = SUIT_CLUB);
     
     void printCard() const;
     
