@@ -1,3 +1,10 @@
+# This is the makefile for the Blackjack Two program.
+# Setup:
+#       - Ensure that the makefile and all the dependent files are in the same directory.
+#	- Ensure that the compiler flag CXX is updated to specify a compiler that is 
+#	  C++11 compatible, here it is the compiler is g++ 4.8 located at /usr/local/bin/g++-4.8
+
+
 CXX = /usr/local/bin/g++-4.8
 CXXFLAGS = -Wall -std=c++11
 
