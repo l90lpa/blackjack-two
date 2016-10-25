@@ -5,24 +5,37 @@
 #	  C++11 compatible, here it is the compiler is g++ 4.8 located at /usr/local/bin/g++-4.8
 
 
+EXE = blackjack-two
+
+INC_DIR = include
+SRC_DIR = src
+OBJ_DIR = objects
+
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+
+
+#CXX is the compiler to be used ensure that it is g++ version > version 4.8.
+# The "-I" flag adds a search path for the compiler to search for files from.
+# "$(CURDIR)" is a predefined variable that evaluates to the file path of the makefile.
 CXX = /usr/local/bin/g++-4.8
-CXXFLAGS = -Wall -std=c++11
+CXXFLAGS = -I$(CURDIR) -Wall -std=c++11
 
-objects = main.o card.o deck.o
+all: $(EXE)
 
-all: blackjackTwo
+$(EXE) : $(OBJ)
+	$(CXX) $(OBJ) -o $(EXE)
 
-blackjackTwo : $(objects)
-	$(CXX) $(CXXFLAGS) $(objects) -o blackjackTwo
-
-main.o : main.cpp card.hpp deck.hpp
-	$(CXX) $(CXXFLAGS) -c main.cpp
-card.o : card.cpp card.hpp
-	$(CXX) $(CXXFLAGS) -c card.cpp
-deck.o : deck.cpp deck.hpp
-	$(CXX) $(CXXFLAGS) -c deck.cpp
+$(OBJ_DIR)/main.o : $(SRC_DIR)/main.cpp $(INC_DIR)/card.hpp $(INC_DIR)/deck.hpp
+	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
+	
+$(OBJ_DIR)/card.o : $(SRC_DIR)/card.cpp $(INC_DIR)/card.hpp
+	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/card.cpp -o $(OBJ_DIR)/card.o
+	
+$(OBJ_DIR)/deck.o : $(SRC_DIR)/deck.cpp $(INC_DIR)/deck.hpp
+	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/deck.cpp -o $(OBJ_DIR)/deck.o
 
 .PHONY : clean
 clean : 
-	rm $(objects)
-	rm blackjackTwo
+	$(RM) $(OBJ)
+	$(RM) $(EXE)
