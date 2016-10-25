@@ -21,19 +21,23 @@ OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 CXX = /usr/local/bin/g++-4.8
 CXXFLAGS = -I$(CURDIR) -Wall -std=c++11
 
+
+# "$@" evaluates as the file path/name of the target of a rule.
+# "$<" evaluates as the first prerequisite (dependency) of a rule.
+# thus the above a purely being used reduce typing.
 all: $(EXE)
 
 $(EXE) : $(OBJ)
-	$(CXX) $(OBJ) -o $(EXE)
+	$(CXX) $(OBJ) -o $@
 
 $(OBJ_DIR)/main.o : $(SRC_DIR)/main.cpp $(INC_DIR)/card.hpp $(INC_DIR)/deck.hpp
-	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
 $(OBJ_DIR)/card.o : $(SRC_DIR)/card.cpp $(INC_DIR)/card.hpp
-	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/card.cpp -o $(OBJ_DIR)/card.o
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
 $(OBJ_DIR)/deck.o : $(SRC_DIR)/deck.cpp $(INC_DIR)/deck.hpp
-	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/deck.cpp -o $(OBJ_DIR)/deck.o
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PHONY : clean
 clean : 
