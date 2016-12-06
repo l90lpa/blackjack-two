@@ -91,7 +91,7 @@ void Player::addScore(Player::playerID index, int cardValue, char testChoice)
 
 
 
-void Players::printScore(Player::playerID index)
+void Player::printScore(Player::playerID index)
 {
     if(index == PLAYERID_COMPUTER)
     {
@@ -105,7 +105,7 @@ void Players::printScore(Player::playerID index)
 
 
 
-int Players::getScore(Player::playerID index)
+int Player::getScore(Player::playerID index)
 {
     return m_player[index].playerScore;
 }
