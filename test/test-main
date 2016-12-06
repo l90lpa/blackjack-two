@@ -126,28 +126,28 @@ BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToHumanWithScoreNine_humanGetsChoi
     BOOST_CHECK_EQUAL(competitor.getScore(Player::PLAYERID_HUMAN), 20);
 }
 
-BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToHumanWithScoreTen_humanGivenValueEleven, F_Players)
+BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToHumanWithScoreTen_humanGivenValueEleven, F_Player)
 {
     competitor.addScore(Player::PLAYERID_HUMAN, 10);
     competitor.addScore(Player::PLAYERID_HUMAN, 11);
     BOOST_CHECK_EQUAL(competitor.getScore(Player::PLAYERID_HUMAN), 21);
 }
 
-BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToHumanWithScoreTwelve_humanGivenValueOne, F_Players)
+BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToHumanWithScoreTwelve_humanGivenValueOne, F_Player)
 {
     competitor.addScore(Player::PLAYERID_HUMAN, 12);
     competitor.addScore(Player::PLAYERID_HUMAN, 11);
     BOOST_CHECK_EQUAL(competitor.getScore(Player::PLAYERID_HUMAN), 13);
 }
 
-BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToComputerWithScoreTen_computerGivenValueEleven, F_Players)
+BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToComputerWithScoreTen_computerGivenValueEleven, F_Player)
 {
     competitor.addScore(Player::PLAYERID_COMPUTER, 10);
     competitor.addScore(Player::PLAYERID_COMPUTER, 11);
     BOOST_CHECK_EQUAL(competitor.getScore(Player::PLAYERID_COMPUTER), 21);
 }
 
-BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToComputerWithScoreThirteen_computerGivenValueOne, F_Players)
+BOOST_FIXTURE_TEST_CASE(Player_passValueElevenToComputerWithScoreThirteen_computerGivenValueOne, F_Player)
 {
     competitor.addScore(Player::PLAYERID_COMPUTER, 13);
     competitor.addScore(Player::PLAYERID_COMPUTER, 11);
