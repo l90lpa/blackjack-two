@@ -43,6 +43,9 @@ $(OBJ_DIR)/card.o : $(SRC_DIR)/card.cpp $(INC_DIR)/card.hpp
 	
 $(OBJ_DIR)/deck.o : $(SRC_DIR)/deck.cpp $(INC_DIR)/deck.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+	
+$(OBJ_DIR)/player.o : $(SRC_DIR)/player.cpp $(INC_DIR)/player.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PHONY : clean
 clean : 
