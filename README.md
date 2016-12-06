@@ -9,3 +9,4 @@ This is a single player blackjack game played against the computer as the dealer
 
 ## recent updates
 - updated to allow Ace card to take value 11 or 1 depending on the situation and the player's choice.
+- updated deck.dealCard() to loop to the start of newly shuffled deck after each complete cycle through.
