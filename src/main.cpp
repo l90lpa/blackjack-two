@@ -9,8 +9,10 @@
 #include <iostream>
 #include "card.hpp"
 #include "deck.hpp"
+#include "player.hpp"
 
-char getPlayersChoice()
+
+char playersChoice()
 {
     char choice;
     std::cout << "Do you want to hit (h) or stand (s): ";
@@ -20,39 +22,47 @@ char getPlayersChoice()
 
 bool playBlackjack(Deck& deck)
 {
-    int dealerScore{0};
-    int playerScore{0};
+    Player competitor;
     
-    dealerScore = deck.dealCard().getCardValue();
-    std::cout << "Dealer has score, " << dealerScore << ".";
+    competitor.addScore(Player::PLAYERID_COMPUTER, deck.dealCard().getCardValue());
+    competitor.printScore(Player::PLAYERID_COMPUTER);
     
-    playerScore = deck.dealCard().getCardValue() + deck.dealCard().getCardValue();
-    std::cout << "\nYou have score, " << playerScore << ".\n";
+    competitor.addScore(Player::PLAYERID_HUMAN, deck.dealCard().getCardValue());
     
-    while(1)
+    competitor.addScore(Player::PLAYERID_HUMAN, deck.dealCard().getCardValue());
+    competitor.printScore(Player::PLAYERID_HUMAN);
+    
+    if(competitor.getScore(Player::PLAYERID_HUMAN) != 21)
     {
-        int choice = getPlayersChoice();
-        if(choice == 'h')
+        while(1)
         {
-            playerScore += deck.dealCard().getCardValue();
-            std::cout << "You have score, " << playerScore << ".\n";
+            int choice = playersChoice();
+            if(choice == 'h')
+            {
+                competitor.addScore(Player::PLAYERID_HUMAN, deck.dealCard().getCardValue());
+                competitor.printScore(Player::PLAYERID_HUMAN);
+            }
+            else if(choice == 's')
+            {
+                break;
+            }
+            if(competitor.getScore(Player::PLAYERID_HUMAN) == 21)
+                break;
+            else if(competitor.getScore(Player::PLAYERID_HUMAN) > 21)
+                return false;
         }
-        else if(choice == 's')
-            break;
-        if(playerScore > 21)
-            return false;
     }
     
-    while(dealerScore < playerScore)
+    while(competitor.getScore(Player::PLAYERID_COMPUTER) < competitor.getScore(Player::PLAYERID_HUMAN))
     {
-        dealerScore += deck.dealCard().getCardValue();
-        std::cout << "Dealer has score, " << dealerScore << ".\n";
+        competitor.addScore(Player::PLAYERID_COMPUTER, deck.dealCard().getCardValue());
+        competitor.printScore(Player::PLAYERID_COMPUTER);
     }
     
-    if(dealerScore > 21)
+    if(competitor.getScore(Player::PLAYERID_COMPUTER) > 21)
         return true;
     
-    return (playerScore > dealerScore);
+    return (competitor.getScore(Player::PLAYERID_HUMAN) > competitor.getScore(Player::PLAYERID_COMPUTER));
 }
 
 int main()

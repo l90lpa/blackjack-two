@@ -65,5 +65,14 @@ void Deck::shuffleDeck()
 
 const Card& Deck::dealCard()
 {
-    return m_deck[m_cardIndex++];
+    if(m_cardIndex < 52)
+    {
+        return m_deck[m_cardIndex++];
+    }
+    else
+    {
+        m_cardIndex = 0;
+        this->shuffleDeck();
+        return m_deck[m_cardIndex++];
+    }
 }
