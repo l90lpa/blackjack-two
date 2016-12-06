@@ -29,7 +29,7 @@ public:
 private:
     std::array<playerInfo, 2> m_player;
 public:
-    Players();
+    Player();
     
     void addScore(playerID index, int cardValue, char testChoice = '0');
     
