@@ -17,6 +17,15 @@
 #include <iostream>
 #include "card.hpp"
 #include "deck.hpp"
+#include "players.hpp"
+
+
+
+//For use in Players class, test suite.
+struct F_Players
+{
+    Players competitor;
+};
 
 
 BOOST_AUTO_TEST_SUITE(test_suite_card)
@@ -93,6 +102,56 @@ BOOST_AUTO_TEST_CASE(dealCard_usingOrderedDeckDealFirstThreeCards_shouldDeal_2H_
     BOOST_CHECK(orderedDeck.dealCard() == TwoH);
     BOOST_CHECK(orderedDeck.dealCard() == ThreeH);
     BOOST_CHECK(orderedDeck.dealCard() == FourH);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+
+
+BOOST_AUTO_TEST_SUITE(test_suite_players)
+
+BOOST_FIXTURE_TEST_CASE(Players_passValueElevenToHumanWithScoreNine_humanGetsChoice, F_Players)
+{
+    BOOST_REQUIRE_EQUAL(competitor.getPlayerScore(Players::PLAYERID_HUMAN), 0);
+    
+    //Set human players score to 9.
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 8);
+    BOOST_REQUIRE_EQUAL(competitor.getPlayerScore(Players::PLAYERID_HUMAN), 8);
+    
+    //Simulate an ace by adding value 11 and player choosing Ace Low.
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 11, 'l');
+    BOOST_REQUIRE_EQUAL(competitor.getPlayerScore(Players::PLAYERID_HUMAN), 9);
+    //Simulate a second ace and player choosing Ace High.
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 11, 'h');
+    BOOST_CHECK_EQUAL(competitor.getPlayerScore(Players::PLAYERID_HUMAN), 20);
+}
+
+BOOST_FIXTURE_TEST_CASE(Players_passValueElevenToHumanWithScoreTen_humanGivenValueEleven, F_Players)
+{
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 10);
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 11);
+    BOOST_CHECK_EQUAL(competitor.getPlayerScore(Players::PLAYERID_HUMAN), 21);
+}
+
+BOOST_FIXTURE_TEST_CASE(Players_passValueElevenToHumanWithScoreTwelve_humanGivenValueOne, F_Players)
+{
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 12);
+    competitor.addPlayerScore(Players::PLAYERID_HUMAN, 11);
+    BOOST_CHECK_EQUAL(competitor.getPlayerScore(Players::PLAYERID_HUMAN), 13);
+}
+
+BOOST_FIXTURE_TEST_CASE(Players_passValueElevenToComputerWithScoreTen_computerGivenValueEleven, F_Players)
+{
+    competitor.addPlayerScore(Players::PLAYERID_COMPUTER, 10);
+    competitor.addPlayerScore(Players::PLAYERID_COMPUTER, 11);
+    BOOST_CHECK_EQUAL(competitor.getPlayerScore(Players::PLAYERID_COMPUTER), 21);
+}
+
+BOOST_FIXTURE_TEST_CASE(Players_passValueElevenToComputerWithScoreThirteen_computerGivenValueOne, F_Players)
+{
+    competitor.addPlayerScore(Players::PLAYERID_COMPUTER, 13);
+    competitor.addPlayerScore(Players::PLAYERID_COMPUTER, 11);
+    BOOST_CHECK_EQUAL(competitor.getPlayerScore(Players::PLAYERID_COMPUTER), 14);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
