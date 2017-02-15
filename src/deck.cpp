@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "deck.hpp"
+#include "include/deck.hpp"
 
 Deck::Deck() : m_cardIndex{0}
 {
