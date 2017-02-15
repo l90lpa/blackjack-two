@@ -7,9 +7,9 @@
 //
 
 #include <iostream>
-#include "card.hpp"
-#include "deck.hpp"
-#include "player.hpp"
+#include "include/card.hpp"
+#include "include/deck.hpp"
+#include "include/player.hpp"
 
 
 char playersChoice()
