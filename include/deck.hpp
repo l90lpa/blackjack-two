@@ -11,7 +11,7 @@
 
 #include <array>
 #include <iostream>
-#include "card.hpp"
+#include "include/card.hpp"
 
 class Deck
 {
