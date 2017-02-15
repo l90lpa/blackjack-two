@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "card.hpp"
+#include "include/card.hpp"
 
 Card::Card(CardRank rank, CardSuit suit) : m_rank{rank}, m_suit{suit} { }
 
